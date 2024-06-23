@@ -1,0 +1,72 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.0.1
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/HPCI-Lab/sqaaas:
+      branch: main
+      repo: https://github.com/HPCI-Lab/sqaaas.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/HPCI-Lab/sqaaas git:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-pink-gecko.sh
+        container: qc.acc_ugly-asparagus-kakapo
+  QC.Doc:
+    repos:
+      github.com/HPCI-Lab/sqaaas find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.gamy-harlequin-squirrel.sh
+        container: qc.doc_shabby-plum-crane
+      github.com/HPCI-Lab/sqaaas git:
+        commands:
+        - /usr/bin/env sh .sqa/script.skimpy-cinnamon-harrier.sh
+        container: qc.doc_foggy-blue-macaque
+      github.com/HPCI-Lab/sqaaas markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.gimpy-rose-horse.sh
+        container: qc.doc_muggy-red-malamute
+      github.com/HPCI-Lab/sqaaas restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.pokey-xanthic-squirt.sh
+        container: qc.doc_gamy-chartreuse-lemur
+  QC.Lic:
+    repos:
+      github.com/HPCI-Lab/sqaaas licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.beady-flax-echidna.sh
+        container: qc.lic_cozy-yellow-mist
+  QC.Sec:
+    repos:
+      github.com/HPCI-Lab/sqaaas bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.blurry-mauve-cuttlefish.sh
+        container: qc.sec_goopy-maroon-snake
+  QC.Sty:
+    repos:
+      github.com/HPCI-Lab/sqaaas flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-azure-pig.sh
+        container: qc.sty_cheeky-cerise-chinchilla
+      github.com/HPCI-Lab/sqaaas jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.paltry-cerulean-malamute.sh
+        container: qc.sty_surly-copper-dunker
+  QC.Uni:
+    repos:
+      github.com/HPCI-Lab/sqaaas pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.homey-emerald-yak.sh
+        container: qc.uni_bumpy-lemon-barracuda
+  QC.Ver:
+    repos:
+      github.com/HPCI-Lab/sqaaas get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.scaly-green-wasp.sh
+        container: qc.ver_skanky-mustard-balinese
+timeout: 5400
